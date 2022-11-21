@@ -46,7 +46,7 @@ pipeline {
 //sshagent(['ubuntu']) {    
 //sh "ssh -o StrictHostKeyChecking=no ubuntu@13.233.157.140 'docker run -p 8004:8080 -d --name my-webapp sunilraju99/my-webapp:1.0'"
 	script {
-	sh 'docker run --rm -p 8004:8080 -d --name my-webapp rgoneni/my-webapp:1.0	 
+	sh 'docker run --rm -p 8004:8080 -d --name my-webapp rgoneni/my-webapp:1.0'	 
 	    }
       }
             
