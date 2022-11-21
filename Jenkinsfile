@@ -20,15 +20,16 @@ pipeline {
     stage ('docker build and tag') {
       steps {
         sh 'docker build -t my-webapp:latest .'
-        sh 'docker tag my-webapp sunilraju99/my-webapp:1.0'
+        sh 'docker tag my-webapp rgoneni/my-webapp:1.0'
       }
     }
     stage ('publish image to dockerhub') {
 	 steps {	   
-        withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub1')]) {
-	sh 'docker login -u sunilraju99 -p ${dockerhub1}'   
+        //withCredentials([string(credentialsId: 'id_hubdocker', variable: 'dockerhub1')]) {
+		 docker.withRegistry('https://hub.docker.com', 'id_hubdocker') {
+	//sh 'docker login -u sunilraju99 -p ${}'   
 }
-		sh 'docker push sunilraju99/my-webapp:1.0'
+		sh 'docker push rgoneni/my-webapp:1.0'
 		}
 		}
 	 //stage('Run Docker container on Jenkins Agent') {
@@ -42,7 +43,7 @@ pipeline {
 	     //sh 'docker run -p 8004:8080 -d --name my-webapp sunilraju99/my-webapp:1.0'		      
 sshagent(['ubuntu']) {    
 sh "ssh -o StrictHostKeyChecking=no ubuntu@13.233.157.140 'docker run -p 8004:8080 -d --name my-webapp sunilraju99/my-webapp:1.0'"
-		 
+	script {sh 'docker run --rm -p 8004:8080 -d --name my-webapp rgoneni/myw-webapp:1.0	 
 	    }
       }
             
