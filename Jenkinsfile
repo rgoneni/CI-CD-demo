@@ -25,10 +25,11 @@ pipeline {
     }
     stage ('publish image to dockerhub') {
 	 steps {	   
-        //withCredentials([string(credentialsId: 'id_hubdocker', variable: 'dockerhub1')]) {
-		 docker.withRegistry('https://registry.hub.docker.com', 'id_hubdocker') {
+        //withCredentials([string(credentialsId: 'id_hubdocker', variable: 'dockerhub1')]) 
+		 docker.withRegistry('https://registry.hub.docker.com', 'id_hubdocker') 
+	{
 	//sh 'docker login -u sunilraju99 -p ${}'   
-}
+	
 		//sh 'docker push rgoneni/my-webapp:1.0'
 	    def app
 		 app = docker.build("rgoneni/my-webapp:1.0")
@@ -36,7 +37,7 @@ pipeline {
 		 
 		 //def customImage = docker.build("rgoneni/my-webapp:1.0")
 		//customImage.push()
-		}
+	}
 		}
 	 //stage('Run Docker container on Jenkins Agent') {
 		 //steps {  
